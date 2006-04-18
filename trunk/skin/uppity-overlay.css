@@ -1,0 +1,6 @@
+#tb-uppity {
+  list-style-image: url("chrome://uppity/skin/tb-icon-large.png");
+}
+toolbar[iconsize="small"] #tb-uppity {
+  list-style-image: url("chrome://uppity/skin/tb-icon-small.png");
+}

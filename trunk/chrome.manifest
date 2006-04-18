@@ -1,0 +1,8 @@
+content	uppity	content/
+overlay	chrome://browser/content/browser.xul	chrome://uppity/content/uppity-overlay.xul
+overlay	chrome://navigator/content/navigator.xul	chrome://uppity/content/uppity-overlay.xul
+skin	uppity	classic/1.0	skin/
+style	chrome://global/content/customizeToolbar.xul	chrome://uppity/skin/uppity-overlay.css
+
+locale	uppity	en-US	locale/en-US/
+locale	uppity	fr	locale/fr/

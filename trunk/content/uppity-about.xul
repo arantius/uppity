@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE window SYSTEM "chrome://uppity/locale/uppity.dtd">
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://uppity/skin/uppity-about.css" type="text/css"?> 
+
+<!-- Original template by Jed Brown -->
+
+<window class="dialog"
+	title="&uppity.about;"
+	orient="vertical"
+	autostretch="always"
+	onload="sizeToContent()"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<groupbox align="center" orient="horizontal">
+	<vbox>
+		<text value="Uppity" style="font-weight: bold; font-size: x-large;"/>
+		<text value="ver. 1.3"/>
+		<separator class="thin"/>
+		<text value="&uppity.createdby;" style="font-weight: bold;"/>
+		<text value="Anthony Lieuallen" class="url"
+			onclick="window.open('http://www.arantius.com/'); window.close();"/>
+		<separator class="thin"/>
+		<text value="&uppity.homepage;" class="url"
+			onclick="window.open('http://www.arantius.com/topic/arantius/firefox+extensions/'); window.close();"/>
+		<separator class="thin"/>
+		<text value="Graphics By:" style="font-weight: bold;"/>
+		<text value="Lee Netherton" />
+	</vbox>
+	<spring flex="11" />
+		<image src="chrome://uppity/skin/em-icon.png" style='padding: 0 10px 0 20px;' />
+	</groupbox>
+
+	<hbox>
+	<spacer flex="1"/>
+		<button label="Close" oncommand="window.close();"/>
+	</hbox>
+</window>

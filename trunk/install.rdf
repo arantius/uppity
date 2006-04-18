@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+	<Description about="urn:mozilla:install-manifest">
+		<em:id>{16cbd87c-eb99-4f5c-9825-83cf13ab7ff8}</em:id>
+		<em:name>Uppity</em:name>
+		<em:version>1.4</em:version>
+		<em:description>Navigate up one level (directory).</em:description>
+		<em:creator>Anthony Lieuallen</em:creator>
+		<em:homepageURL>http://www.arantius.com/article/arantius/uppity/</em:homepageURL>
+		<em:updateURL>http://www.arantius.com/misc/firefox-extensions/mine/updates.rdf</em:updateURL>
+		<em:iconURL>chrome://uppity/skin/em-icon.png</em:iconURL>
+		<em:aboutURL>chrome://uppity/content/uppity-about.xul</em:aboutURL>
+		<em:optionsURL>chrome://uppity/content/uppity-options.xul</em:optionsURL>
+
+		<em:targetApplication>
+			<Description>
+				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+				<em:minVersion>1.5</em:minVersion>
+				<em:maxVersion>1.5+</em:maxVersion>
+			</Description>
+		</em:targetApplication>
+	</Description>
+</RDF>

@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<!DOCTYPE overlay SYSTEM "chrome://uppity/locale/overlay.dtd">
+<?xml-stylesheet href='chrome://uppity/skin/uppity-overlay.css' type='text/css'?> 
+<overlay id='uppity-overlay' xmlns='http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul'>
+
+<script type='application/x-javascript' src='chrome://uppity/content/uppity.js'></script>
+
+<toolbarpalette id='BrowserToolbarPalette'>
+	<toolbarbutton id='tb-uppity' 
+		type="menu-button" 
+		class="toolbarbutton-1 chromeclass-toolbar-additional"
+		oncommand="uppity.goUp(); event.preventBubble();"
+		label='Uppity'
+		tooltiptext='&uppity.goup.long;'
+	>
+		<menupopup context=""
+			onpopupshowing="return uppity.showDropDown(event);"
+			oncommand="uppity.goUp(event); event.preventBubble();"
+		/>
+	</toolbarbutton>
+</toolbarpalette>
+
+<statusbar id='status-bar'>
+	<statusbarpanel id='status-bar-uppity' insertafter='livemark-button'
+		style='display: none;'
+	>
+		<image id='status-bar-uppity-image' width='16' height='16'
+			src='chrome://uppity/skin/sb-icon.png'
+			onclick="uppity.goUp(); event.preventBubble();"
+			context='status-bar-uppity-context'
+		/>
+	</statusbarpanel>
+
+	<popup id='status-bar-uppity-context'>
+		<menuitem label='&uppity.goup;' oncommand='uppity.goUp();' />
+		<menuitem label='&uppity.turnbuttonoff;' oncommand='uppity.turnOffSBButton();' />
+	</popup>
+</statusbar>
+
+<keyset id="mainKeyset">
+	<key id='uppity-key-shortcut'
+		modifiers='alt'
+		keycode='VK_UP'
+		oncommand='uppity.goUp();'
+	/>
+</keyset>
+
+</overlay>
