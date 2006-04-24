@@ -3,13 +3,12 @@
 	<Description about="urn:mozilla:install-manifest">
 		<em:id>{16cbd87c-eb99-4f5c-9825-83cf13ab7ff8}</em:id>
 		<em:name>Uppity</em:name>
-		<em:version>1.4</em:version>
+		<em:version>1.4.1</em:version>
 		<em:description>Navigate up one level (directory).</em:description>
 		<em:creator>Anthony Lieuallen</em:creator>
 		<em:homepageURL>http://www.arantius.com/article/arantius/uppity/</em:homepageURL>
 		<em:updateURL>http://www.arantius.com/misc/firefox-extensions/mine/updates.rdf</em:updateURL>
 		<em:iconURL>chrome://uppity/skin/em-icon.png</em:iconURL>
-		<em:aboutURL>chrome://uppity/content/uppity-about.xul</em:aboutURL>
 		<em:optionsURL>chrome://uppity/content/uppity-options.xul</em:optionsURL>
 
 		<em:targetApplication>
