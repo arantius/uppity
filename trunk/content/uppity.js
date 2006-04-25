@@ -81,9 +81,10 @@ showDropDown:function(e) {
 	var box=e.target;
 	//remove any existing entries
 	var children = box.childNodes;
-	for (var i=0; i<children.length; i++) {
-		var index = children[i].getAttribute("index");
-		if (index) box.removeChild(children[i]);
+	while (children[0]) {
+		try {
+			box.removeChild(children[0]);
+		} catch (e) { this.dumpErr(e); }
 	}
 
 	//create new entries
@@ -100,92 +101,50 @@ showDropDown:function(e) {
 },
 
 getURLs:function() {
-	var URLs=new Array(), loc=getBrowser().contentWindow.location;
+	var URLs=[], loc=getBrowser().contentWindow.location;
 	try {
-	//check for validity
-	if ('about:'==loc.protocol) return URLs;
+		//check for validity
+		if ('about:'==loc.protocol) return URLs;
 
-	//get the URL
-	var path=loc.href;
-	//strip off the scheme and host
-	path=path.replace(/^.*:\/\/[^\/]*\//, '');
-	//and the trailing slash if there
-	path=path.replace(/\/$/, '');
-	var host=loc.host;
-	var scheme=loc.protocol+'//';
-	var emptyPath=(''==path);
+		//get the URL
+		var path=loc.href;
+		//strip off the scheme and host
+		path=path.replace(/^.*:\/\/[^\/]*\//, '');
+		//and the trailing slash if there
+		path=path.replace(/\/$/, '');
+		var host=loc.host;
+		var scheme=loc.protocol+'//';
+		var emptyPath=(''==path);
 
-	//strip hash if there
-	if (path.indexOf('#')>0) {
-		path=path.replace(/#.*/, '');
-		URLs[URLs.length]=scheme+host+'/'+path;
-	}
-	//strip querystring if there
-	if (path.indexOf('?')>0) {
-		path=path.replace(/\?.*/, '');
-		URLs[URLs.length]=scheme+host+'/'+path;
-	}
-	//strip files/directories if there
-	while (path.indexOf('/')>0) {
-		path=path.replace(/\/[^\/]*$/, '');
-		URLs[URLs.length]=scheme+host+'/'+path+'/';
-	}
-	//host only
-	if (!emptyPath) URLs[URLs.length]=scheme+host+'/';
-	//strip subdomains if there
-	while (host.match(/\..*\./)) {
-		host=host.replace(/[^.]*\./, '');
-		URLs[URLs.length]=scheme+host+'/';
-	}
+		//strip hash if there
+		if (path.indexOf('#')>0) {
+			path=path.replace(/#.*/, '');
+			URLs[URLs.length]=scheme+host+'/'+path;
+		}
+		//strip querystring if there
+		if (path.indexOf('?')>0) {
+			path=path.replace(/\?.*/, '');
+			URLs[URLs.length]=scheme+host+'/'+path;
+		}
+		//strip files/directories if there
+		while (path.indexOf('/')>0) {
+			path=path.replace(/\/[^\/]*$/, '');
+			URLs[URLs.length]=scheme+host+'/'+path+'/';
+		}
+		//host only
+		if (!emptyPath) URLs[URLs.length]=scheme+host+'/';
+		//strip subdomains if there
+		while (host.match(/\..*\./)) {
+			host=host.replace(/[^.]*\./, '');
+			URLs[URLs.length]=scheme+host+'/';
+		}
 	} catch (e) { this.dumpErr(e); }
 	return URLs;
 },
 
-/*
-setDisabled:function() {
-	var URLs=uppity.getURLs();
-	document.getElementById('uppity-caster').disabled=(0==URLs.length);
-},
-*/
 }//close var uppity
 
 window.addEventListener('load', function() {
-//turn on/off status bar button
-uppity.setSBButtonVis();
-
-/*
-//set listener for disabling buttons
-var uppityListener={
-//the actual work
-onLocationChange:function(aProgress, aRequest, aURI) {
-	var URLs=uppity.getURLs();
-	var cmd=document.getElementById('uppity-goUp-command');
-	if (cmd) {
-		cmd.disabled=(0==URLs.length?'true':'false');
-		dump(cmd.disabled);
-	}
-},
-
-//the junk to get the interface right
-QueryInterface: function(aIID) {
-	if (aIID.equals(Components.interfaces.nsIWebProgressListener) ||
-		aIID.equals(Components.interfaces.nsISupportsWeakReference) ||
-		aIID.equals(Components.interfaces.nsISupports)
-	) return this;
-	throw Components.results.NS_NOINTERFACE;
-},
-onStateChange:function() { return 0; },
-onProgressChange:function() { return 0; },
-onStatusChange:function() { return 0; },
-onSecurityChange:function() { return 0; },
-onLinkIconAvailable:function() { return 0; },
-}//close var uppityListener
-
-//register the listener
-gBrowser.addProgressListener(
-	uppityListener, 
-	Components.interfaces.nsIWebProgress.NOTIFY_STATE_DOCUMENT
-);
-*/
-
+	//turn on/off status bar button
+	uppity.setSBButtonVis();
 }, false); // end window.addEventListener('load'...)
