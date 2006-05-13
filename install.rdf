@@ -5,11 +5,14 @@
 		<em:name>Uppity</em:name>
 		<em:version>1.4.1</em:version>
 		<em:description>Navigate up one level (directory).</em:description>
+
 		<em:creator>Anthony Lieuallen</em:creator>
-		<em:homepageURL>http://www.arantius.com/article/arantius/uppity/</em:homepageURL>
-		<em:updateURL>http://www.arantius.com/misc/firefox-extensions/mine/updates.rdf</em:updateURL>
+		<em:contributor>Lee Netherton - Icons</em:contributor>
+
 		<em:iconURL>chrome://uppity/skin/em-icon.png</em:iconURL>
 		<em:optionsURL>chrome://uppity/content/uppity-options.xul</em:optionsURL>
+		<em:homepageURL>http://www.arantius.com/article/arantius/uppity/</em:homepageURL>
+		<em:updateURL>http://www.arantius.com/misc/firefox-extensions/mine/updates.rdf</em:updateURL>
 
 		<em:targetApplication>
 			<Description>
