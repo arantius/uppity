@@ -4,10 +4,11 @@ overlay	chrome://navigator/content/navigator.xul	chrome://uppity/content/uppity-
 skin	uppity	classic/1.0	skin/
 style	chrome://global/content/customizeToolbar.xul	chrome://uppity/skin/uppity-overlay.css
 
-locale	uppity	en-US	locale/en-US/
-locale	uppity	fr-FR	locale/fr-FR/
-locale	uppity	it-IT	locale/it-IT/
-locale	uppity	nl-NL	locale/nl-NL/
-locale	uppity	ru-RU	locale/ru-RU/
-locale	uppity	da-DK	locale/da-DK/
-locale	uppity	pt-BR	locale/pt-BR/
+locale uppity da-DK locale/da-DK/
+locale uppity en-US locale/en-US/
+locale uppity es-ES locale/es-ES/
+locale uppity fr-FR locale/fr-FR/
+locale uppity it-IT locale/it-IT/
+locale uppity nl-NL locale/nl-NL/
+locale uppity pt-BR locale/pt-BR/
+locale uppity ru-RU locale/ru-RU/
