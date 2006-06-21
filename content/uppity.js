@@ -67,6 +67,7 @@ dumpErr:function(e) {
 },
 
 setSBButtonVis:function() {
+	if (!gBrowser) return;
 	var show=this.getPref('bool', 'uppity.sb-icon');
 	var sb=document.getElementById('status-bar-uppity');
 	sb.style.display=(show?'-moz-box':'none');
