@@ -134,10 +134,17 @@ getURLs:function() {
 		}
 		//host only
 		if (!emptyPath) URLs[URLs.length]=scheme+host+'/';
+		
 		//strip subdomains if there
-		while (host.match(/\..*\./)) {
-			host=host.replace(/[^.]*\./, '');
-			URLs[URLs.length]=scheme+host+'/';
+		if (!host.match(/([0-9]+\.)+/)) { // if it's not a numeric IP
+			var hostSuff=host.substr(host.length-6);
+			host=host.substr(0, host.length-6);
+			alert(hostSuff);
+
+			while (host.match(/\..*\./)) {
+				host=host.replace(/[^.]*\./, '');
+				URLs[URLs.length]=scheme+host+hostSuff+'/';
+			}
 		}
 	} catch (e) { this.dumpErr(e); }
 	return URLs;
