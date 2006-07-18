@@ -139,7 +139,6 @@ getURLs:function() {
 		if (!host.match(/([0-9]+\.)+/)) { // if it's not a numeric IP
 			var hostSuff=host.substr(host.length-6);
 			host=host.substr(0, host.length-6);
-			alert(hostSuff);
 
 			while (host.match(/\..*\./)) {
 				host=host.replace(/[^.]*\./, '');
