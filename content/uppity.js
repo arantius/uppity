@@ -140,7 +140,7 @@ getURLs:function() {
 			var hostSuff=host.substr(host.length-6);
 			host=host.substr(0, host.length-6);
 
-			while (host.match(/\..*\./)) {
+			while (-1!=host.indexOf('.')) {
 				host=host.replace(/[^.]*\./, '');
 				URLs[URLs.length]=scheme+host+hostSuff+'/';
 			}
@@ -149,9 +149,36 @@ getURLs:function() {
 	return URLs;
 },
 
+setDisabled:function(url) {
+	if (url && url.match(/^(f|ht)tp:/)) {
+		document.getElementById('tb-uppity').removeAttribute('disabled');
+	} else {
+		document.getElementById('tb-uppity').setAttribute('disabled', true);
+	}
+},
+
+webProgressListener:{
+	onProgressChange:function (wp, req, cur, max, curtotal, maxtotal) {},
+	onStateChange:function (wp, req, state, status) {},
+	onLocationChange:function (wp, req, loc) {
+		uppity.setDisabled(loc.asciiSpec);
+	},
+	onStatusChange:function (wp, req, status, message) {},
+	onSecurityChange:function (wp, req, state) {},
+	startDocumentLoad:function(req) {},
+	endDocumentLoad:function(req, status) {}
+}
+
 }//close var uppity
 
 window.addEventListener('load', function() {
 	//turn on/off status bar button
 	uppity.setSBButtonVis();
+
+	// set initial disabled status
+	uppity.setDisabled();
+
+	// set load progress listener
+	var doc=document.getElementById("content");
+	if (doc) doc.addProgressListener(uppity.webProgressListener); 
 }, false); // end window.addEventListener('load'...)
