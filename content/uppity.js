@@ -150,7 +150,7 @@ getURLs:function() {
 },
 
 setDisabled:function(url) {
-	if (url && url.match(/^(f|ht)tp:/)) {
+	if (uppity.getURLs().length>0) {
 		document.getElementById('tb-uppity').removeAttribute('disabled');
 	} else {
 		document.getElementById('tb-uppity').setAttribute('disabled', true);
