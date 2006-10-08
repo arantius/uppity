@@ -6,12 +6,12 @@ var uppity={
 goUp:function(e) {
 	var URLs=this.getURLs(), URL;
 	if (0==URLs.length) return;
-	if (e) {
+	if ('undefined' != typeof e.target.value) {
 		URL=URLs[e.target.value];
 	} else {
 		URL=URLs[0];
 	}
-	getBrowser().contentWindow.location.assign(URL);
+	openUILink(URL, e);
 },
 
 getPref:function(type, name) {

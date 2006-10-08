@@ -9,13 +9,15 @@
 	<toolbarbutton id='tb-uppity' 
 		type="menu-button" 
 		class="toolbarbutton-1 chromeclass-toolbar-additional"
-		oncommand="uppity.goUp(); event.preventBubble();"
+		oncommand="uppity.goUp(event); event.preventBubble();"
+		onclick="if (1==event.button) uppity.goUp(event);"
 		label='Uppity'
 		tooltiptext='&uppity.goup.long;'
 	>
 		<menupopup context=""
 			onpopupshowing="return uppity.showDropDown(event);"
 			oncommand="uppity.goUp(event); event.preventBubble();"
+			onclick="if (1==event.button) hidePopup();"
 		/>
 	</toolbarbutton>
 </toolbarpalette>
