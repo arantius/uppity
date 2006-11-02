@@ -136,7 +136,7 @@ getURLs:function() {
 		if (!emptyPath) URLs[URLs.length]=scheme+host+'/';
 		
 		//strip subdomains if there
-		if (!host.match(/([0-9]+\.)+/)) { // if it's not a numeric IP
+		if (!host.match(/^([0-9]+\.)+$/)) { // if it's not a numeric IP
 			var hostSuff=host.substr(host.length-6);
 			host=host.substr(0, host.length-6);
 

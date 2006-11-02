@@ -28,13 +28,13 @@
 	>
 		<image id='status-bar-uppity-image' width='16' height='16'
 			src='chrome://uppity/skin/sb-icon.png'
-			onclick="uppity.goUp(); event.preventBubble();"
+			onclick="uppity.goUp(event); event.preventBubble();"
 			context='status-bar-uppity-context'
 		/>
 	</statusbarpanel>
 
 	<popup id='status-bar-uppity-context'>
-		<menuitem label='&uppity.goup;' oncommand='uppity.goUp();' />
+		<menuitem label='&uppity.goup;' oncommand='uppity.goUp(event); event.preventBubble();' />
 		<menuitem label='&uppity.turnbuttonoff;' oncommand='uppity.turnOffSBButton();' />
 	</popup>
 </statusbar>
