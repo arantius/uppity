@@ -9,14 +9,14 @@
 	<toolbarbutton id='tb-uppity' 
 		type="menu-button" 
 		class="toolbarbutton-1 chromeclass-toolbar-additional"
-		oncommand="uppity.goUp(event); event.preventBubble();"
+		oncommand="uppity.goUp(event); event.preventDefault();"
 		onclick="if (1==event.button) uppity.goUp(event);"
 		label='Uppity'
 		tooltiptext='&uppity.goup.long;'
 	>
 		<menupopup context=""
 			onpopupshowing="return uppity.showDropDown(event);"
-			oncommand="uppity.goUp(event); event.preventBubble();"
+			oncommand="uppity.goUp(event); event.preventDefault();"
 			onclick="if (1==event.button) hidePopup();"
 		/>
 	</toolbarbutton>
@@ -28,13 +28,13 @@
 	>
 		<image id='status-bar-uppity-image' width='16' height='16'
 			src='chrome://uppity/skin/sb-icon.png'
-			onclick="uppity.goUp(event); event.preventBubble();"
+			onclick="uppity.goUp(event); event.preventDefault();"
 			context='status-bar-uppity-context'
 		/>
 	</statusbarpanel>
 
 	<popup id='status-bar-uppity-context'>
-		<menuitem label='&uppity.goup;' oncommand='uppity.goUp(event); event.preventBubble();' />
+		<menuitem label='&uppity.goup;' oncommand='uppity.goUp(event); event.preventDefault();' />
 		<menuitem label='&uppity.turnbuttonoff;' oncommand='uppity.turnOffSBButton();' />
 	</popup>
 </statusbar>
@@ -43,7 +43,7 @@
 	<key id='uppity-key-shortcut'
 		modifiers='alt'
 		keycode='VK_UP'
-		oncommand='uppity.goUp();'
+		oncommand='uppity.goUp(event); event.preventDefault();'
 	/>
 </keyset>
 
