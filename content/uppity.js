@@ -6,7 +6,7 @@ var uppity={
 goUp:function(e) {
 	var URLs=this.getURLs(), URL;
 	if (0==URLs.length) return;
-	if ('undefined' != typeof e.target.value) {
+	if (e && 'undefined'!=typeof e.target.value) {
 		URL=URLs[e.target.value];
 	} else {
 		URL=URLs[0];
@@ -150,6 +150,9 @@ getURLs:function() {
 },
 
 setDisabled:function(url) {
+	// if they don't have the toolbar button, don't toggle it
+	if (!document.getElementById('tb-uppity')) return;
+
 	if (uppity.getURLs().length>0) {
 		document.getElementById('tb-uppity').removeAttribute('disabled');
 	} else {

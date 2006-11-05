@@ -43,7 +43,7 @@
 	<key id='uppity-key-shortcut'
 		modifiers='alt'
 		keycode='VK_UP'
-		oncommand='uppity.goUp(event); event.preventDefault();'
+		oncommand='uppity.goUp(null); event.preventDefault();'
 	/>
 </keyset>
 
