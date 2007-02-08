@@ -11,7 +11,7 @@
 
 		<em:iconURL>chrome://uppity/skin/em-icon.png</em:iconURL>
 		<em:optionsURL>chrome://uppity/content/uppity-options.xul</em:optionsURL>
-		<em:homepageURL>http://firefox-extensions.arantius.com/uppity</em:homepageURL>
+		<em:homepageURL>http://trac.arantius.com/wiki/Extensions/Uppity</em:homepageURL>
 		<em:updateURL>http://arantius.com/misc/firefox-extensions/mine/updates.rdf</em:updateURL>
 
 		<em:targetApplication>
