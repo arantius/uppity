@@ -1,17 +1,17 @@
 var uppity={
 //this is directly adapted from a bookmarklet I wrote some time ago
-//so the variables are all terse.  a later version should see a 
+//so the variables are all terse.  a later version should see a
 //revamp of this code but I'm proud to finally have written my first
 //firefox extension from scratch!
 goUp:function(e) {
-	var URLs=this.getURLs(), URL;
+	var URLs=this.getURLs();
 	if (0==URLs.length) return;
+
 	if (e && 'undefined'!=typeof e.target.value) {
-		URL=URLs[e.target.value];
+		openUILink(URLs[e.target.value], e);
 	} else {
-		URL=URLs[0];
+		openUILink(URLs[0], e);
 	}
-	openUILink(URL, e);
 },
 
 getPref:function(type, name) {
@@ -21,7 +21,7 @@ getPref:function(type, name) {
 		case 'bool':   return pref.getBoolPref(name);
 		case 'int':    return pref.getIntPref(name);
 		case 'string':
-		default:       return pref.getCharPref(name); 
+		default:       return pref.getCharPref(name);
 		}
 	} catch (e) { this.dumpErr(e) }
 	return '';
@@ -134,7 +134,7 @@ getURLs:function() {
 		}
 		//host only
 		if (!emptyPath) URLs[URLs.length]=scheme+host+'/';
-		
+
 		//strip subdomains if there
 		if (!host.match(/^([0-9]+\.)+$/)) { // if it's not a numeric IP
 			var hostSuff=host.substr(host.length-6);
@@ -183,5 +183,5 @@ window.addEventListener('load', function() {
 
 	// set load progress listener
 	var doc=document.getElementById("content");
-	if (doc) doc.addProgressListener(uppity.webProgressListener); 
+	if (doc) doc.addProgressListener(uppity.webProgressListener);
 }, false); // end window.addEventListener('load'...)

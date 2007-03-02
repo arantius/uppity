@@ -1,16 +1,15 @@
 <?xml version='1.0'?>
 <!DOCTYPE overlay SYSTEM "chrome://uppity/locale/overlay.dtd">
-<?xml-stylesheet href='chrome://uppity/skin/uppity-overlay.css' type='text/css'?> 
+<?xml-stylesheet href='chrome://uppity/skin/uppity-overlay.css' type='text/css'?>
 <overlay id='uppity-overlay' xmlns='http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul'>
 
 <script type='application/x-javascript' src='chrome://uppity/content/uppity.js'></script>
 
 <toolbarpalette id='BrowserToolbarPalette'>
-	<toolbarbutton id='tb-uppity' 
-		type="menu-button" 
-		class="toolbarbutton-1 chromeclass-toolbar-additional"
-		oncommand="uppity.goUp(event); event.preventDefault();"
-		onclick="if (1==event.button) uppity.goUp(event);"
+	<toolbarbutton id='tb-uppity' type='menu-button'
+		class='toolbarbutton-1 chromeclass-toolbar-additional'
+		oncommand='uppity.goUp(event);'
+		onclick='if (1==event.button) uppity.goUp(event); event.preventDefault();'
 		label='Uppity'
 		tooltiptext='&uppity.goup.long;'
 	>
@@ -23,20 +22,18 @@
 </toolbarpalette>
 
 <statusbar id='status-bar'>
-	<statusbarpanel id='status-bar-uppity' insertafter='livemark-button'
+	<statusbarpanel id='status-bar-uppity' class='statusbarpanel-iconic'
 		style='display: none;'
-	>
-		<image id='status-bar-uppity-image' width='16' height='16'
+		onclick="if (0==event.button) uppity.goUp();"
 			src='chrome://uppity/skin/sb-icon.png'
-			onclick="uppity.goUp(event); event.preventDefault();"
 			context='status-bar-uppity-context'
-		/>
+	>
 	</statusbarpanel>
 
-	<popup id='status-bar-uppity-context'>
-		<menuitem label='&uppity.goup;' oncommand='uppity.goUp(event); event.preventDefault();' />
+	<menupopup id='status-bar-uppity-context' position='before_end'>
+		<menuitem label='&uppity.goup;' oncommand='uppity.goUp();' />
 		<menuitem label='&uppity.turnbuttonoff;' oncommand='uppity.turnOffSBButton();' />
-	</popup>
+	</menupopup>
 </statusbar>
 
 <keyset id="mainKeyset">
