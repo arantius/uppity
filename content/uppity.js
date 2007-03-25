@@ -137,12 +137,20 @@ getURLs:function() {
 
 		//strip subdomains if there
 		if (!host.match(/^([0-9]+\.)+$/)) { // if it's not a numeric IP
-			var hostSuff=host.substr(host.length-6);
+			var hostSuffix='';
+			// strip port
+			var x=host.lastIndexOf(':');
+			if (x>0) {
+				hostSuffix=host.substr(x);
+				host=host.substr(0, x);
+			}
+			// strip TLD
+			hostSuffix=host.substr(host.length-6)+hostSuffix;
 			host=host.substr(0, host.length-6);
 
 			while (-1!=host.indexOf('.')) {
 				host=host.replace(/[^.]*\./, '');
-				URLs[URLs.length]=scheme+host+hostSuff+'/';
+				URLs[URLs.length]=scheme+host+hostSuffix+'/';
 			}
 		}
 	} catch (e) { this.dumpErr(e); }
