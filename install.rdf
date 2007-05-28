@@ -3,7 +3,7 @@
 	<Description about="urn:mozilla:install-manifest">
 		<em:id>{16cbd87c-eb99-4f5c-9825-83cf13ab7ff8}</em:id>
 		<em:name>Uppity</em:name>
-		<em:version>1.4.13</em:version>
+		<em:version>1.4.14</em:version>
 		<em:description>Navigate up one level (directory).</em:description>
 
 		<em:creator>Anthony Lieuallen</em:creator>

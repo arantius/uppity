@@ -16,6 +16,8 @@ locale uppity fi-FI locale/fi-FI/
 locale uppity fr-FR locale/fr-FR/
 locale uppity he-IL locale/he-IL/
 locale uppity it-IT locale/it-IT/
+locale uppity ja-JP locale/ja-JP/
+locale uppity ko-KR locale/ko-KR/
 locale uppity nl-NL locale/nl-NL/
 locale uppity pt-BR locale/pt-BR/
 locale uppity ru-RU locale/ru-RU/
