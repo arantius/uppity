@@ -183,13 +183,16 @@ webProgressListener:{
 }//close var uppity
 
 window.addEventListener('load', function() {
-	//turn on/off status bar button
+	// turn on/off status bar button
 	uppity.setSBButtonVis();
 
 	// set initial disabled status
 	uppity.setDisabled();
 
 	// set load progress listener
-	var doc=document.getElementById("content");
+	var doc=document.getElementById('content');
 	if (doc) doc.addProgressListener(uppity.webProgressListener);
-}, false); // end window.addEventListener('load'...)
+	// also listen for when there are new tabs created
+	var cont=gBrowser.tabContainer;
+	if (cont) cont.addEventListener('TabSelect', uppity.setDisabled, false);
+}, false);
