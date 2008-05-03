@@ -1,8 +1,5 @@
 var uppity={
-//this is directly adapted from a bookmarklet I wrote some time ago
-//so the variables are all terse.  a later version should see a
-//revamp of this code but I'm proud to finally have written my first
-//firefox extension from scratch!
+
 goUp:function(e) {
 	var URLs=this.getURLs();
 	if (0==URLs.length) return;
@@ -23,7 +20,7 @@ getPref:function(type, name) {
 		case 'string':
 		default:       return pref.getCharPref(name);
 		}
-	} catch (e) { this.dumpErr(e) }
+	} catch (e) { }
 	return '';
 },
 
@@ -36,13 +33,13 @@ setPref:function(type, name, value) {
 		case 'string':
 		default:       pref.setCharPref(name, value); break;
 		}
-	} catch (e) { this.dumpErr(e) }
+	} catch (e) { }
 },
 
 loadOptions:function() {
 	try {
 	window.document.getElementById('uppity-sb-icon').checked=this.getPref('bool', 'uppity.sb-icon');
-	} catch (e) { this.dumpErr(e) }
+	} catch (e) { }
 	return true;
 },
 
@@ -54,16 +51,8 @@ saveOptions:function() {
 
 	//this might be a little dirty ....
 	window.opener.opener.uppity.setSBButtonVis();
-	} catch (e) { this.dumpErr(e) }
+	} catch (e) { }
 	return true;
-},
-
-dumpErr:function(e) {
-	var s='Error in uppity:  ';
-	s+='Line: '+e.lineNumber+'  ';
-	s+=e.name+': '+e.message+'\n';
-	//s+='Stack:\n'+e.stack+'\n\n';
-	dump(s);
 },
 
 setSBButtonVis:function() {
@@ -78,6 +67,12 @@ turnOffSBButton:function() {
 	this.setSBButtonVis();
 },
 
+openMenu:function() {
+	var btn=document.getElementById('tb-uppity');
+	if (!btn) return;
+	btn.open=true;
+},
+
 showDropDown:function(e) {
 	var box=e.target;
 	//remove any existing entries
@@ -85,7 +80,7 @@ showDropDown:function(e) {
 	while (children[0]) {
 		try {
 			box.removeChild(children[0]);
-		} catch (e) { this.dumpErr(e); }
+		} catch (e) { }
 	}
 
 	//create new entries
@@ -153,7 +148,7 @@ getURLs:function() {
 				URLs[URLs.length]=scheme+host+hostSuffix+'/';
 			}
 		}
-	} catch (e) { this.dumpErr(e); }
+	} catch (e) { }
 	return URLs;
 },
 
@@ -172,7 +167,7 @@ webProgressListener:{
 	onProgressChange:function (wp, req, cur, max, curtotal, maxtotal) {},
 	onStateChange:function (wp, req, state, status) {},
 	onLocationChange:function (wp, req, loc) {
-		uppity.setDisabled(loc.asciiSpec);
+		uppity.setDisabled(loc?loc.asciiSpec:null);
 	},
 	onStatusChange:function (wp, req, status, message) {},
 	onSecurityChange:function (wp, req, state) {},

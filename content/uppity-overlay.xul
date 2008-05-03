@@ -42,6 +42,11 @@
 		keycode='VK_UP'
 		oncommand='uppity.goUp(null); event.preventDefault();'
 	/>
+	<key id='uppity-key-open-menu'
+		modifiers='alt'
+		keycode='VK_DOWN'
+		oncommand='uppity.openMenu(); event.preventDefault();'
+	/>
 </keyset>
 
 </overlay>
