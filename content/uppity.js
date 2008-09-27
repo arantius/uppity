@@ -108,6 +108,9 @@ getURLs:function() {
 		path=path.replace(/^.*:\/\/[^\/]*\//, '');
 		//and the trailing slash if there
 		path=path.replace(/\/$/, '');
+		//and any extra leading slashes
+		path=path.replace(/^\/+/, '');
+
 		var host=loc.host;
 		var scheme=loc.protocol+'//';
 		var emptyPath=(''==path);
