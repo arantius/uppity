@@ -118,22 +118,23 @@ getURLs:function() {
 		//strip hash if there
 		if (path.indexOf('#')>0) {
 			path=path.replace(/#.*/, '');
-			URLs[URLs.length]=scheme+host+'/'+path;
+			URLs.push(scheme+host+'/'+path);
 		}
 		//strip querystring if there
 		if (path.indexOf('?')>0) {
 			path=path.replace(/\?.*/, '');
-			URLs[URLs.length]=scheme+host+'/'+path;
+			URLs.push(scheme+host+'/'+path);
 		}
 		//strip files/directories if there
 		while (path.indexOf('/')>0) {
 			path=path.replace(/\/[^\/]*$/, '');
-			URLs[URLs.length]=scheme+host+'/'+path+'/';
+			URLs.push(scheme+host+'/'+path+'/');
 		}
 		//host only
-		if (!emptyPath) URLs[URLs.length]=scheme+host+'/';
+		if (!emptyPath) URLs.push(scheme+host+'/');
 
 		//strip subdomains if there
+		var subs=0;
 		if (!host.match(/^([0-9]+\.)+$/)) { // if it's not a numeric IP
 			var hostSuffix='';
 			// strip port
@@ -147,10 +148,28 @@ getURLs:function() {
 			host=host.substr(0, host.length-6);
 
 			while (-1!=host.indexOf('.')) {
+				subs++;
 				host=host.replace(/[^.]*\./, '');
-				URLs[URLs.length]=scheme+host+hostSuffix+'/';
+				URLs.push(scheme+host+hostSuffix+'/');
 			}
 		}
+
+		// If the original URL does NOT start with 'www.', then put in an
+		// entry that does.
+		var lastUrl=URLs[URLs.length-1];
+		var origUrl=loc.href;
+		if (!origUrl.match(/^[a-z]+:\/\/www\./)) {
+			var wwwUrl=lastUrl.replace(/^([a-z]+:\/\/)/, '$1www.');
+			if (subs) {
+				// If there were subdomains stripped, put the "www" choice
+				// between them and the bare domain.
+				URLs.splice(URLs.length-1, 0, wwwUrl);
+			} else {
+				// Otherwise, put the "www." choice at the end of the list.
+				URLs.push(wwwUrl);
+			}
+		}
+
 	} catch (e) { }
 	return URLs;
 },
