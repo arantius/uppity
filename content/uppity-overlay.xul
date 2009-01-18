@@ -9,7 +9,7 @@
 	<toolbarbutton id='tb-uppity' type='menu-button'
 		class='toolbarbutton-1 chromeclass-toolbar-additional'
 		oncommand='uppity.goUp(event);'
-		onclick='if (1==event.button) uppity.goUp(event); event.preventDefault();'
+		onclick='if (1==event.button) { uppity.goUp(event); event.preventDefault(); }'
 		label='Uppity'
 		tooltiptext='&uppity.goup.long;'
 	>
