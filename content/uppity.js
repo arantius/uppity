@@ -1,13 +1,13 @@
 var uppity={
 
 goUp:function(e) {
-	var URLs=this.getURLs();
+	var URLs=this.getUrls();
 	if (0==URLs.length) return;
 
 	if (e && 'undefined'!=typeof e.target.value) {
 		openUILink(URLs[e.target.value], e);
 	} else {
-		openUILink(URLs[0], e);
+		openUILink(URLs[1], e);
 	}
 },
 
@@ -84,35 +84,86 @@ showDropDown:function(e) {
 	}
 
 	//create new entries
-	var URLs=this.getURLs(), m;
+	var origUrl=getBrowser().contentWindow.location.href;
+	var URLs=this.getUrls(), m;
 	if (0==URLs.length) return;// false;
 	for (var i=0; i<URLs.length; i++) {
 		m=document.createElement("menuitem");
 		m.setAttribute('label', URLs[i]);
 		m.setAttribute('index', i);
 		m.setAttribute('value', i);
+		m.setAttribute('type', 'radio');
+		if (origUrl==URLs[i]) {
+			m.setAttribute('checked', 'true');
+		}
 		box.appendChild(m);
 	}
 	//return true;
 },
 
-getURLs:function() {
-	var URLs=[], loc=getBrowser().contentWindow.location;
+parseUrlRegex:new RegExp('([a-z]+://)([^/]+)(.*)'),
+parseUrl:function(url) {
+	var m=uppity.parseUrlRegex.exec(url);
+	return {
+		'scheme':m[1],
+		'host':m[2],
+		'path':m[3],
+	}
+},
+
+getUrls:function() {
+	// http://kevin.vanzonneveld.net
+	function in_array(needle, haystack, argStrict) {
+		var found = false, key, strict = !!argStrict;
+	 
+		for (key in haystack) {
+			if ((strict && haystack[key] === needle) || (!strict && haystack[key] == needle)) {
+				found = true;
+				break;
+			}
+		}
+	 
+		return found;
+	}
+
+	var b=getBrowser();
+	var thisUrl=b.contentWindow.location.href;
+	var lastUrl=b.uppityLastUrl;
+
 	try {
 		//check for validity
-		if ('about:'==loc.protocol) return URLs;
+		if ('about:'==thisUrl.substr(0, 6)) return [];
 
+		if (lastUrl && in_array(thisUrl, uppity.getUrlsFor(lastUrl))) {
+			// If this location comes from uppity-ing the last location, start
+			// making choices from that previous location.
+			thisUrl=lastUrl;
+		} else {
+			// Otherwise save this location, for possible recall later.
+			// We make up an object that is a shallow copy -- otherwise, we get
+			// a reference which is updated as we browse.
+			b.uppityLastUrl=thisUrl;
+		}
+
+		return uppity.getUrlsFor(thisUrl);
+	} catch (e) {
+		return [];
+	}
+},
+
+getUrlsFor:function(url) {
+	if (!url) return [];
+
+	var URLs=[];
+	var loc=uppity.parseUrl(url);
+
+	try {
 		//get the URL
-		var path=loc.href;
-		//strip off the scheme and host
-		path=path.replace(/^.*:\/\/[^\/]*\//, '');
-		//and the trailing slash if there
-		path=path.replace(/\/$/, '');
-		//and any extra leading slashes
-		path=path.replace(/^\/+/, '');
-
+		var scheme=loc.scheme;
 		var host=loc.host;
-		var scheme=loc.protocol+'//';
+		var path=loc.path
+			.replace(/\/$/, '')
+			.replace(/^\/+/, '');
 		var emptyPath=(''==path);
 
 		//strip hash if there
@@ -157,8 +208,7 @@ getURLs:function() {
 		// If the original URL does NOT start with 'www.', then put in an
 		// entry that does.
 		var lastUrl=URLs[URLs.length-1];
-		var origUrl=loc.href;
-		if (!origUrl.match(/^[a-z]+:\/\/www\./)) {
+		if (!url.match(/^[a-z]+:\/\/www\./)) {
 			var wwwUrl=lastUrl.replace(/^([a-z]+:\/\/)/, '$1www.');
 			if (subs) {
 				// If there were subdomains stripped, put the "www" choice
@@ -169,8 +219,11 @@ getURLs:function() {
 				URLs.push(wwwUrl);
 			}
 		}
-
 	} catch (e) { }
+	
+	// Make the "current URL" indicator consistently visible.
+	if (0!=URLs.length) URLs.unshift(url);
+
 	return URLs;
 },
 
@@ -178,7 +231,7 @@ setDisabled:function(url) {
 	// if they don't have the toolbar button, don't toggle it
 	if (!document.getElementById('tb-uppity')) return;
 
-	if (uppity.getURLs().length>0) {
+	if (uppity.getUrls().length>0) {
 		document.getElementById('tb-uppity').removeAttribute('disabled');
 	} else {
 		document.getElementById('tb-uppity').setAttribute('disabled', true);
