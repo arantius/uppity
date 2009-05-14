@@ -37,7 +37,6 @@
 </statusbar>
 
 <keyset id="mainKeyset">
-	<!-- Existing Alt- keyboard shortcuts for Windows/Linux -->
 	<key id='uppity-key-shortcut'
 		modifiers='alt'
 		keycode='VK_UP'
@@ -45,17 +44,6 @@
 	/>
 	<key id='uppity-key-open-menu'
 		modifiers='alt'
-		keycode='VK_DOWN'
-		oncommand='uppity.openMenu(); event.preventDefault();'
-	/>
-	<!-- Apple- keyboard shortcuts for Mac -->
-	<key id='uppity-key-shortcut2'
-		modifiers='meta'
-		keycode='VK_UP'
-		oncommand='uppity.goUp(null); event.preventDefault();'
-	/>
-	<key id='uppity-key-open-menu2'
-		modifiers='meta'
 		keycode='VK_DOWN'
 		oncommand='uppity.openMenu(); event.preventDefault();'
 	/>
