@@ -177,6 +177,7 @@ getUrlsFor:function(url) {
 			URLs.push(scheme+host+'/'+path);
 		}
 		//strip files/directories if there
+		path=path.replace(/\/+$/, '');
 		while (path.indexOf('/')>0) {
 			path=path.replace(/\/[^\/]*$/, '');
 			URLs.push(scheme+host+'/'+path+'/');
