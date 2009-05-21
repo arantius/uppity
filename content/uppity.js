@@ -5,9 +5,11 @@ goUp:function(e) {
 	if (0==URLs.length) return;
 
 	if (e && 'undefined'!=typeof e.target.value) {
-		openUILink(URLs[e.target.value], e);
+		openUILink(URLs.list[e.target.value], e);
 	} else {
-		openUILink(URLs[1], e);
+		if (URLs.next) {
+			openUILink(URLs.list[URLs.next], e);
+		}
 	}
 },
 
@@ -87,18 +89,17 @@ showDropDown:function(e) {
 	var origUrl=getBrowser().contentWindow.location.href;
 	var URLs=this.getUrls(), m;
 	if (0==URLs.length) return;// false;
-	for (var i=0; i<URLs.length; i++) {
+	for (var i=0; i<URLs.list.length; i++) {
 		m=document.createElement("menuitem");
-		m.setAttribute('label', URLs[i]);
+		m.setAttribute('label', URLs.list[i]);
 		m.setAttribute('index', i);
 		m.setAttribute('value', i);
 		m.setAttribute('type', 'radio');
-		if (origUrl==URLs[i]) {
+		if (i==URLs.curr) {
 			m.setAttribute('checked', 'true');
 		}
 		box.appendChild(m);
 	}
-	//return true;
 },
 
 parseUrlRegex:new RegExp('([a-z]+://)([^/]+)(.*)'),
@@ -132,9 +133,9 @@ getUrls:function() {
 
 	try {
 		//check for validity
-		if ('about:'==thisUrl.substr(0, 6)) return [];
+		if ('about:'==thisUrl.substr(0, 6)) throw new Exception('bad scheme!');
 
-		if (lastUrl && in_array(thisUrl, uppity.getUrlsFor(lastUrl))) {
+		if (lastUrl && in_array(thisUrl, uppity.getUrlsFor(lastUrl).list)) {
 			// If this location comes from uppity-ing the last location, start
 			// making choices from that previous location.
 			thisUrl=lastUrl;
@@ -147,12 +148,13 @@ getUrls:function() {
 
 		return uppity.getUrlsFor(thisUrl);
 	} catch (e) {
-		return [];
+		// For any problem, including our made up ones, return empty list.
+		return {'list':[], 'curr':null, 'next':null};
 	}
 },
 
 getUrlsFor:function(url) {
-	if (!url) return [];
+	if (!url) throw new Exception('url required!');
 
 	var URLs=[];
 	var loc=uppity.parseUrl(url);
@@ -225,14 +227,25 @@ getUrlsFor:function(url) {
 	// Make the "current URL" indicator consistently visible.
 	if (0!=URLs.length) URLs.unshift(url);
 
-	return URLs;
+	// Find the "current" and "next" index.
+	var here=getBrowser().contentWindow.location.href;
+	var curr=null, next=null
+	for (var i=0, url=null; url=URLs[i]; i++) {
+		if (here==url) {
+			curr=i;
+			if (URLs[i+1]) next=i+1;
+			break
+		}
+	}
+	
+	return {'list':URLs, 'curr':curr, 'next':next};
 },
 
 setDisabled:function(url) {
 	// if they don't have the toolbar button, don't toggle it
 	if (!document.getElementById('tb-uppity')) return;
 
-	if (uppity.getUrls().length>0) {
+	if (URLs.list.length>0) {
 		document.getElementById('tb-uppity').removeAttribute('disabled');
 	} else {
 		document.getElementById('tb-uppity').setAttribute('disabled', true);
