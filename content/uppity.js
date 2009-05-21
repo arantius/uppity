@@ -245,7 +245,7 @@ setDisabled:function(url) {
 	// if they don't have the toolbar button, don't toggle it
 	if (!document.getElementById('tb-uppity')) return;
 
-	if (URLs.list.length>0) {
+	if (uppity.getUrls().list.length>0) {
 		document.getElementById('tb-uppity').removeAttribute('disabled');
 	} else {
 		document.getElementById('tb-uppity').setAttribute('disabled', true);
