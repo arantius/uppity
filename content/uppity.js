@@ -22,7 +22,9 @@ getPref:function(type, name) {
 		case 'string':
 		default:       return pref.getCharPref(name);
 		}
-	} catch (e) { }
+	} catch (e) {
+		Components.utils.reportError(e);
+	}
 	return '';
 },
 
@@ -35,25 +37,33 @@ setPref:function(type, name, value) {
 		case 'string':
 		default:       pref.setCharPref(name, value); break;
 		}
-	} catch (e) { }
+	} catch (e) {
+		Components.utils.reportError(e);
+	}
 },
 
 loadOptions:function() {
 	try {
-	window.document.getElementById('uppity-sb-icon').checked=this.getPref('bool', 'uppity.sb-icon');
-	} catch (e) { }
+		window.document.getElementById('uppity-sb-icon')
+			.checked=this.getPref('bool', 'uppity.sb-icon');
+	} catch (e) {
+		Components.utils.reportError(e);
+	}
 	return true;
 },
 
 saveOptions:function() {
 	try {
-	this.setPref('bool', 'uppity.sb-icon',
-		Boolean(window.document.getElementById('uppity-sb-icon').checked)
-	);
+		this.setPref('bool', 'uppity.sb-icon',
+			Boolean(window.document.getElementById('uppity-sb-icon').checked)
+		);
 
-	//this might be a little dirty ....
-	window.opener.opener.uppity.setSBButtonVis();
-	} catch (e) { }
+		//this might be a little dirty ....
+		window.opener.opener.uppity.setSBButtonVis();
+	} catch (e) {
+		Components.utils.reportError(e);
+	}
+
 	return true;
 },
 
@@ -82,7 +92,9 @@ showDropDown:function(e) {
 	while (children[0]) {
 		try {
 			box.removeChild(children[0]);
-		} catch (e) { }
+		} catch (e) {
+			Components.utils.reportError(e);
+		}
 	}
 
 	//create new entries
@@ -102,9 +114,11 @@ showDropDown:function(e) {
 	}
 },
 
-parseUrlRegex:new RegExp('([a-z]+://)([^/]+)(.*)'),
+parseUrlRegex:new RegExp('([a-z]+://)([^/]*)(/.*)'),
 parseUrl:function(url) {
 	var m=uppity.parseUrlRegex.exec(url);
+	if (!m) throw new Error('could not parse URL: '+url);
+
 	return {
 		'scheme':m[1],
 		'host':m[2],
@@ -133,7 +147,7 @@ getUrls:function() {
 
 	try {
 		//check for validity
-		if ('about:'==thisUrl.substr(0, 6)) throw new Exception('bad scheme!');
+		if ('about:'==thisUrl.substr(0, 6)) throw new Error('bad scheme: '+thisUrl);
 
 		if (lastUrl && in_array(thisUrl, uppity.getUrlsFor(lastUrl).list)) {
 			// If this location comes from uppity-ing the last location, start
@@ -149,12 +163,13 @@ getUrls:function() {
 		return uppity.getUrlsFor(thisUrl);
 	} catch (e) {
 		// For any problem, including our made up ones, return empty list.
+		Components.utils.reportError(e);
 		return {'list':[], 'curr':null, 'next':null};
 	}
 },
 
 getUrlsFor:function(url) {
-	if (!url) throw new Exception('url required!');
+	if (!url) throw new Error('url required!');
 
 	var URLs=[];
 	var loc=uppity.parseUrl(url);
@@ -185,7 +200,7 @@ getUrlsFor:function(url) {
 			URLs.push(scheme+host+'/'+path+'/');
 		}
 		//host only
-		if (!emptyPath) URLs.push(scheme+host+'/');
+		if (!emptyPath && ''!=host) URLs.push(scheme+host+'/');
 
 		//strip subdomains if there
 		var subs=0;
@@ -208,10 +223,10 @@ getUrlsFor:function(url) {
 			}
 		}
 
-		// If the original URL does NOT start with 'www.', then put in an
-		// entry that does.
+		// If the original URL does NOT start with 'www.' (and this isn't a
+		// "file://" link, with no host), then put in an entry that does.
 		var lastUrl=URLs[URLs.length-1];
-		if (!url.match(/^[a-z]+:\/\/www\./)) {
+		if ('www.'!=loc.host.substr(0, 4) && 'file://'!=loc.scheme) {
 			var wwwUrl=lastUrl.replace(/^([a-z]+:\/\/)/, '$1www.');
 			if (subs) {
 				// If there were subdomains stripped, put the "www" choice
@@ -222,7 +237,9 @@ getUrlsFor:function(url) {
 				URLs.push(wwwUrl);
 			}
 		}
-	} catch (e) { }
+	} catch (e) {
+		Components.utils.reportError(e);
+	}
 	
 	// Make the "current URL" indicator consistently visible.
 	if (0!=URLs.length) URLs.unshift(url);
