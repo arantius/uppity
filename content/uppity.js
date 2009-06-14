@@ -79,13 +79,13 @@ turnOffSBButton:function() {
 	this.setSBButtonVis();
 },
 
-openMenu:function() {
+openTbMenu:function() {
 	var btn=document.getElementById('tb-uppity');
 	if (!btn) return;
 	btn.open=true;
 },
 
-showDropDown:function(e) {
+showTbDropDown:function(e) {
 	var box=e.target;
 	//remove any existing entries
 	var children = box.childNodes;
@@ -97,6 +97,34 @@ showDropDown:function(e) {
 		}
 	}
 
+	uppity.addDropDownEntries(box);
+},
+
+showSbDropDown:function(e) {
+	var box=e.target;
+	//remove any existing entries
+	while (box.lastChild && 'menuseparator'!=box.lastChild.tagName) {
+		try {
+			box.removeChild(box.lastChild);
+		} catch (e) { }
+	}
+
+	uppity.addDropDownEntries(box);
+
+	var haveItems=('menuseparator'!=box.lastChild.tagName)
+	document.getElementById('status-bar-uppity-separator')
+		.setAttribute(
+			'collapsed',
+			( haveItems ? 'false' : 'true' )
+		);
+	document.getElementById('status-bar-uppity-goup')
+		.setAttribute(
+			'disabled',
+			( haveItems ? 'false' : 'true' )
+		);
+},
+
+addDropDownEntries:function(box) {	
 	//create new entries
 	var origUrl=getBrowser().contentWindow.location.href;
 	var URLs=this.getUrls(), m;

@@ -14,7 +14,7 @@
 		tooltiptext='&uppity.goup.long;'
 	>
 		<menupopup context=""
-			onpopupshowing="return uppity.showDropDown(event);"
+			onpopupshowing="return uppity.showTbDropDown(event);"
 			oncommand="uppity.goUp(event); event.preventDefault();"
 			onclick="if (1==event.button) hidePopup();"
 		/>
@@ -30,9 +30,13 @@
 	>
 	</statusbarpanel>
 
-	<menupopup id='status-bar-uppity-context' position='before_end'>
-		<menuitem label='&uppity.goup;' oncommand='uppity.goUp();' />
+	<menupopup id='status-bar-uppity-context' position='before_end'
+		onpopupshowing="return uppity.showSbDropDown(event);"
+		oncommand="uppity.goUp(event); event.preventDefault();"
+	>
+		<menuitem id='status-bar-uppity-goup' label='&uppity.goup;' oncommand='uppity.goUp();' />
 		<menuitem label='&uppity.turnbuttonoff;' oncommand='uppity.turnOffSBButton();' />
+		<menuseparator id='status-bar-uppity-separator' collapsed='true'/>
 	</menupopup>
 </statusbar>
 
@@ -45,7 +49,7 @@
 	<key id='uppity-key-open-menu'
 		modifiers='alt'
 		keycode='VK_DOWN'
-		oncommand='uppity.openMenu(); event.preventDefault();'
+		oncommand='uppity.openTbMenu(); event.preventDefault();'
 	/>
 </keyset>
 
