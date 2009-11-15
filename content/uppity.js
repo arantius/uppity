@@ -201,7 +201,7 @@ getUrls:function() {
 getUrlsFor:function(url) {
 	if (!url) throw new Error('url required!');
 
-	var URLs=[];
+	var URLs=[url];
 	var loc=uppity.parseUrl(url);
 
 	try {
@@ -271,9 +271,6 @@ getUrlsFor:function(url) {
 		if (uppity.reportErrors) Components.utils.reportError(e);
 	}
 	
-	// Make the "current URL" indicator consistently visible.
-	if (0!=URLs.length) URLs.unshift(url);
-
 	// Find the "current" and "next" index.
 	var here=getBrowser().contentWindow.location.href;
 	var curr=null, next=null
