@@ -1,5 +1,7 @@
 var uppity={
 
+reportErrors:false,
+
 goUp:function(e) {
 	var URLs=this.getUrls();
 	if (0==URLs.length) return;
@@ -23,7 +25,7 @@ getPref:function(type, name) {
 		default:       return pref.getCharPref(name);
 		}
 	} catch (e) {
-		Components.utils.reportError(e);
+		if (uppity.reportErrors) Components.utils.reportError(e);
 	}
 	return '';
 },
@@ -38,7 +40,7 @@ setPref:function(type, name, value) {
 		default:       pref.setCharPref(name, value); break;
 		}
 	} catch (e) {
-		Components.utils.reportError(e);
+		if (uppity.reportErrors) Components.utils.reportError(e);
 	}
 },
 
@@ -47,7 +49,7 @@ loadOptions:function() {
 		window.document.getElementById('uppity-sb-icon')
 			.checked=this.getPref('bool', 'uppity.sb-icon');
 	} catch (e) {
-		Components.utils.reportError(e);
+		if (uppity.reportErrors) Components.utils.reportError(e);
 	}
 	return true;
 },
@@ -61,7 +63,7 @@ saveOptions:function() {
 		//this might be a little dirty ....
 		window.opener.opener.uppity.setSBButtonVis();
 	} catch (e) {
-		Components.utils.reportError(e);
+		if (uppity.reportErrors) Components.utils.reportError(e);
 	}
 
 	return true;
@@ -93,7 +95,7 @@ showTbDropDown:function(e) {
 		try {
 			box.removeChild(children[0]);
 		} catch (e) {
-			Components.utils.reportError(e);
+			if (uppity.reportErrors) Components.utils.reportError(e);
 		}
 	}
 
@@ -191,7 +193,7 @@ getUrls:function() {
 		return uppity.getUrlsFor(thisUrl);
 	} catch (e) {
 		// For any problem, including our made up ones, return empty list.
-		Components.utils.reportError(e);
+		if (uppity.reportErrors) Components.utils.reportError(e);
 		return {'list':[], 'curr':null, 'next':null};
 	}
 },
@@ -266,7 +268,7 @@ getUrlsFor:function(url) {
 			}
 		}
 	} catch (e) {
-		Components.utils.reportError(e);
+		if (uppity.reportErrors) Components.utils.reportError(e);
 	}
 	
 	// Make the "current URL" indicator consistently visible.
@@ -312,11 +314,10 @@ webProgressListener:{
 }//close var uppity
 
 window.addEventListener('load', function() {
-	// turn on/off status bar button
-	uppity.setSBButtonVis();
-
-	// set initial disabled status
+	// set initial status
 	uppity.setDisabled();
+	uppity.setSBButtonVis();
+	uppity.reportErrors=uppity.getPref('bool', 'uppity.reportErrors');
 
 	// set load progress listener
 	var doc=document.getElementById('content');
