@@ -113,7 +113,7 @@ showSbDropDown:function(e) {
 
 	uppity.addDropDownEntries(box);
 
-	var haveItems=('menuseparator'!=box.lastChild.tagName)
+	var haveItems=('menuseparator'!=box.lastChild.tagName);
 	document.getElementById('status-bar-uppity-separator')
 		.setAttribute(
 			'collapsed',
@@ -126,7 +126,7 @@ showSbDropDown:function(e) {
 		);
 },
 
-addDropDownEntries:function(box) {	
+addDropDownEntries:function(box) {
 	//create new entries
 	var origUrl=getBrowser().contentWindow.location.href;
 	var URLs=this.getUrls(), m;
@@ -152,22 +152,22 @@ parseUrl:function(url) {
 	return {
 		'scheme':m[1],
 		'host':m[2],
-		'path':m[3],
-	}
+		'path':m[3]
+	};
 },
 
 getUrls:function() {
 	// http://kevin.vanzonneveld.net
 	function in_array(needle, haystack, argStrict) {
 		var found = false, key, strict = !!argStrict;
-	 
+
 		for (key in haystack) {
 			if ((strict && haystack[key] === needle) || (!strict && haystack[key] == needle)) {
 				found = true;
 				break;
 			}
 		}
-	 
+
 		return found;
 	}
 
@@ -270,18 +270,18 @@ getUrlsFor:function(url) {
 	} catch (e) {
 		if (uppity.reportErrors) Components.utils.reportError(e);
 	}
-	
+
 	// Find the "current" and "next" index.
 	var here=getBrowser().contentWindow.location.href;
-	var curr=null, next=null
+	var curr=null, next=null;
 	for (var i=0, url=null; url=URLs[i]; i++) {
 		if (here==url) {
 			curr=i;
 			if (URLs[i+1]) next=i+1;
-			break
+			break;
 		}
 	}
-	
+
 	return {'list':URLs, 'curr':curr, 'next':next};
 },
 
@@ -308,7 +308,7 @@ webProgressListener:{
 	endDocumentLoad:function(req, status) {}
 }
 
-}//close var uppity
+}; //close var uppity
 
 window.addEventListener('load', function() {
 	// set initial status
