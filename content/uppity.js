@@ -1,7 +1,5 @@
 var uppity={
 
-reportErrors:false,
-
 goUp:function(e) {
 	var URLs=this.getUrls();
 	if (0==URLs.length) return;
@@ -28,9 +26,7 @@ showTbDropDown:function(e) {
 	while (children[0]) {
 		try {
 			box.removeChild(children[0]);
-		} catch (e) {
-			if (uppity.reportErrors) Components.utils.reportError(e);
-		}
+		} catch (e) { }
 	}
 
 	uppity.addDropDownEntries(box);
@@ -103,7 +99,6 @@ getUrls:function() {
 		return uppity.getUrlsFor(thisUrl);
 	} catch (e) {
 		// For any problem, including our made up ones, return empty list.
-		if (uppity.reportErrors) Components.utils.reportError(e);
 		return {'list':[], 'curr':null, 'next':null};
 	}
 },
@@ -177,9 +172,7 @@ getUrlsFor:function(url) {
 				URLs.push(wwwUrl);
 			}
 		}
-	} catch (e) {
-		if (uppity.reportErrors) Components.utils.reportError(e);
-	}
+	} catch (e) { }
 
 	// Find the "current" and "next" index.
 	var here=getBrowser().contentWindow.location.href;
@@ -223,7 +216,6 @@ webProgressListener:{
 window.addEventListener('load', function() {
 	// set initial status
 	uppity.setDisabled();
-	uppity.reportErrors=uppity.getPref('bool', 'uppity.reportErrors');
 
 	// set load progress listener
 	var doc=document.getElementById('content');
