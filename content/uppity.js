@@ -56,7 +56,7 @@ addDropDownEntries:function(box) {
 	}
 },
 
-parseUrlRegex:new RegExp('([a-z]+://)([^/]*)(/.*)'),
+parseUrlRegex:new RegExp('(file:/+|[a-z]+://)([^/]*)(/.*)'),
 parseUrl:function(url) {
 	var m=uppity.parseUrlRegex.exec(url);
 	if (!m) throw new Error('could not parse URL: '+url);
