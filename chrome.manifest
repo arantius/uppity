@@ -7,24 +7,35 @@ overlay chrome://navigator/content/navigator.xul chrome://uppity/content/uppity-
 style   chrome://global/content/customizeToolbar.xul    chrome://uppity/skin/uppity-overlay.css
 
 locale uppity af-ZA locale/af-ZA/
+locale uppity ar locale/ar/
 locale uppity ca-AD locale/ca-AD/
 locale uppity cs-CZ locale/cs-CZ/
+locale uppity da locale/da/
 locale uppity da-DK locale/da-DK/
+locale uppity de locale/de/
 locale uppity de-DE locale/de-DE/
 locale uppity en-US locale/en-US/
 locale uppity es-ES locale/es-ES/
 locale uppity fi-FI locale/fi-FI/
+locale uppity fr locale/fr/
 locale uppity fr-FR locale/fr-FR/
 locale uppity gl-ES locale/gl-ES/
 locale uppity he-IL locale/he-IL/
 locale uppity it-IT locale/it-IT/
 locale uppity ja-JP locale/ja-JP/
 locale uppity ko-KR locale/ko-KR/
+locale uppity mk-MK locale/mk-MK/
+locale uppity nl locale/nl/
 locale uppity nl-NL locale/nl-NL/
+locale uppity pl locale/pl/
 locale uppity pl-PL locale/pl-PL/
 locale uppity pt-BR locale/pt-BR/
 locale uppity ru-RU locale/ru-RU/
 locale uppity sk-SK locale/sk-SK/
+locale uppity sr locale/sr/
+locale uppity sr-RS locale/sr-RS/
+locale uppity sv-SE locale/sv-SE/
 locale uppity tr-TR locale/tr-TR/
+locale uppity uk-UA locale/uk-UA/
 locale uppity zh-CN locale/zh-CN/
 locale uppity zh-TW locale/zh-TW/
