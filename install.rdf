@@ -10,7 +10,6 @@
 		<em:contributor>Lee Netherton - Icons</em:contributor>
 
 		<em:iconURL>chrome://uppity/skin/em-icon.png</em:iconURL>
-		<em:optionsURL>chrome://uppity/content/uppity-options.xul</em:optionsURL>
 		<em:homepageURL>http://trac.arantius.com/wiki/Extensions/Uppity</em:homepageURL>
 
 		<em:targetApplication>

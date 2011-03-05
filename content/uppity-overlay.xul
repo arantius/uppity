@@ -21,25 +21,6 @@
 	</toolbarbutton>
 </toolbarpalette>
 
-<statusbar id='status-bar'>
-	<statusbarpanel id='status-bar-uppity' class='statusbarpanel-iconic'
-		style='display: none;'
-		onclick="if (0==event.button) uppity.goUp();"
-			src='chrome://uppity/skin/sb-icon.png'
-			context='status-bar-uppity-context'
-	>
-	</statusbarpanel>
-
-	<menupopup id='status-bar-uppity-context' position='before_end'
-		onpopupshowing="return uppity.showSbDropDown(event);"
-		oncommand="uppity.goUp(event); event.preventDefault();"
-	>
-		<menuitem id='status-bar-uppity-goup' label='&uppity.goup;' oncommand='uppity.goUp();' />
-		<menuitem label='&uppity.turnbuttonoff;' oncommand='uppity.turnOffSBButton();' />
-		<menuseparator id='status-bar-uppity-separator' collapsed='true'/>
-	</menupopup>
-</statusbar>
-
 <keyset id="mainKeyset">
 	<key id='uppity-key-shortcut'
 		modifiers='alt'
