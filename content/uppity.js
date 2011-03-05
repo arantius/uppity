@@ -15,72 +15,6 @@ goUp:function(e) {
 	}
 },
 
-getPref:function(type, name) {
-	var pref = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch);
-	try {
-		switch(type) {
-		case 'bool':   return pref.getBoolPref(name);
-		case 'int':    return pref.getIntPref(name);
-		case 'string':
-		default:       return pref.getCharPref(name);
-		}
-	} catch (e) {
-		if (uppity.reportErrors) Components.utils.reportError(e);
-	}
-	return '';
-},
-
-setPref:function(type, name, value) {
-	var pref = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch);
-	try {
-		switch (type) {
-		case 'bool':   pref.setBoolPref(name, value); break;
-		case 'int':    pref.setIntPref(name, value); break;
-		case 'string':
-		default:       pref.setCharPref(name, value); break;
-		}
-	} catch (e) {
-		if (uppity.reportErrors) Components.utils.reportError(e);
-	}
-},
-
-loadOptions:function() {
-	try {
-		window.document.getElementById('uppity-sb-icon')
-			.checked=this.getPref('bool', 'uppity.sb-icon');
-	} catch (e) {
-		if (uppity.reportErrors) Components.utils.reportError(e);
-	}
-	return true;
-},
-
-saveOptions:function() {
-	try {
-		this.setPref('bool', 'uppity.sb-icon',
-			Boolean(window.document.getElementById('uppity-sb-icon').checked)
-		);
-
-		//this might be a little dirty ....
-		window.opener.opener.uppity.setSBButtonVis();
-	} catch (e) {
-		if (uppity.reportErrors) Components.utils.reportError(e);
-	}
-
-	return true;
-},
-
-setSBButtonVis:function() {
-	var show=this.getPref('bool', 'uppity.sb-icon');
-	var sb=document.getElementById('status-bar-uppity');
-	if (!sb) return;
-	sb.style.display=(show?'-moz-box':'none');
-},
-
-turnOffSBButton:function() {
-	this.setPref('bool', 'uppity.sb-icon', false);
-	this.setSBButtonVis();
-},
-
 openTbMenu:function() {
 	var btn=document.getElementById('tb-uppity');
 	if (!btn) return;
@@ -100,30 +34,6 @@ showTbDropDown:function(e) {
 	}
 
 	uppity.addDropDownEntries(box);
-},
-
-showSbDropDown:function(e) {
-	var box=e.target;
-	//remove any existing entries
-	while (box.lastChild && 'menuseparator'!=box.lastChild.tagName) {
-		try {
-			box.removeChild(box.lastChild);
-		} catch (e) { }
-	}
-
-	uppity.addDropDownEntries(box);
-
-	var haveItems=('menuseparator'!=box.lastChild.tagName);
-	document.getElementById('status-bar-uppity-separator')
-		.setAttribute(
-			'collapsed',
-			( haveItems ? 'false' : 'true' )
-		);
-	document.getElementById('status-bar-uppity-goup')
-		.setAttribute(
-			'disabled',
-			( haveItems ? 'false' : 'true' )
-		);
 },
 
 addDropDownEntries:function(box) {
@@ -313,7 +223,6 @@ webProgressListener:{
 window.addEventListener('load', function() {
 	// set initial status
 	uppity.setDisabled();
-	uppity.setSBButtonVis();
 	uppity.reportErrors=uppity.getPref('bool', 'uppity.reportErrors');
 
 	// set load progress listener
