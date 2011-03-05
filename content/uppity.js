@@ -14,9 +14,15 @@ goUp:function(e) {
 },
 
 openTbMenu:function() {
+	if (uppity.getUrls().list.length==0) return;
+
 	var btn=document.getElementById('tb-uppity');
-	if (!btn) return;
-	btn.open=true;
+	if (btn) {
+		btn.open=true;
+	} else {
+		document.getElementById('urlbar-popup-uppity')
+			.openPopup(document.getElementById('urlbar'), 'after_start');
+	}
 },
 
 showTbDropDown:function(e) {

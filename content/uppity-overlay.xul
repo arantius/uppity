@@ -21,6 +21,14 @@
 	</toolbarbutton>
 </toolbarpalette>
 
+<toolbaritem id="urlbar-container">
+	<menupopup id='urlbar-popup-uppity' position='after_start'
+		onpopupshowing="return uppity.showTbDropDown(event);"
+		oncommand="uppity.goUp(event); event.preventDefault();"
+	>
+	</menupopup>
+</toolbaritem>
+
 <keyset id="mainKeyset">
 	<key id='uppity-key-shortcut'
 		modifiers='alt'
