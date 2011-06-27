@@ -40,7 +40,6 @@ showTbDropDown:function(e) {
 
 addDropDownEntries:function(box) {
   //create new entries
-  var origUrl=getBrowser().contentWindow.location.href;
   var URLs=this.getUrls(), m;
   if (0==URLs.length) return;// false;
   for (var i=0; i<URLs.list.length; i++) {
@@ -71,7 +70,7 @@ parseUrl:function(url) {
 getUrls:function() {
   // http://kevin.vanzonneveld.net
   function in_array(needle, haystack, argStrict) {
-    var found = false, key, strict = !!argStrict;
+    var found = false, key = null, strict = !!argStrict;
 
     for (key in haystack) {
       if ((strict && haystack[key] === needle)
