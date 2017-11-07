@@ -28,6 +28,8 @@ Right click on your toolbar, choose `Customize`, and then just drag-and-drop the
 
 # Changelog
 
+ * Version 1.6 (pending)
+  * Rewrite for WebExtension compatibility.
  * Version 1.5.8 (Jun 26, 2011)
   * Firefox 5.0 compatibility.
   * Updated translations from babelzilla.org.

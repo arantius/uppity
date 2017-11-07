@@ -1,0 +1,44 @@
+{
+  "manifest_version": 2,
+  "name": "Uppity",
+  "version": "1.6",
+  "description": "Navigate up one level (directory).",
+  "homepage_url": "https://github.com/arantius/uppity",
+  "icons": {"32": "skin/em-icon.png"},
+  "default_locale": "en_US",
+
+  "applications": {
+    "gecko": {
+      "id": "{16cbd87c-eb99-4f5c-9825-83cf13ab7ff8}",
+      "strict_min_version": "52.0"
+    }
+  },
+
+  "browser_action": {
+    "browser_style": false,
+    "default_icon": "skin/tb-icon-large.png",
+    "default_title": "Uppity"
+  },
+
+  "background": {
+    "scripts": [
+      "shared.js",
+      "bg.js"
+    ]
+  },
+
+  "commands": {
+    "go-up": {
+      "suggested_key": { "default": "Alt+Up" }
+    },
+    "menu": {
+      "suggested_key": { "default": "Alt+Down" }
+    }
+  },
+
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "webNavigation"
+  ]
+}
