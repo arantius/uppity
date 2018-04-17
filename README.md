@@ -28,7 +28,9 @@ Right click on your toolbar, choose `Customize`, and then just drag-and-drop the
 
 # Changelog
 
- * Version 1.6 (pending)
+ * Version 2.1 (Apr 16, 2018)
+   * Bug fix when multiple Firefox windows are open. (#6)
+ * Version 2.0 (Nov 12, 2017)
   * Rewrite for WebExtension compatibility.
  * Version 1.5.8 (Jun 26, 2011)
   * Firefox 5.0 compatibility.

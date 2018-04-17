@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Uppity",
-  "version": "2.0",
+  "version": "2.1",
   "description": "Navigate up one level (directory).",
   "homepage_url": "https://github.com/arantius/uppity",
   "icons": {"32": "skin/em-icon.png"},
