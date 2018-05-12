@@ -15,14 +15,9 @@ If you were on a page with that URL, Uppity would descend to these URLs, one by 
  * http://www.example.com/
  * http://example.com/
 
-Clicking either the button on the toolbar or status bar will move from one page to the next in that list.
+Clicking the button on the toolbar will move from one page to the next in that list.
 The keyboard shortcut `ALT-Up` (`Option-Up` on the Mac) will also navigate this way.
-Clicking the drop-down arrow next to the toolbar button will present that entire list, from where you can navigate directly to any of those options.  The `ALT-Down` (`Option-Down` on the Mac) key will also open this list.
 
-Both of these buttons are disabled by default.
-(Don't you hate when an extension thinks it's important enough to own your browser?  I do.)
-So, pick which one you'd like to use and turn it on yourself.
-The statusbar button is controlled by the extension options.
 The toolbar button is controlled like any other toolbar button.
 Right click on your toolbar, choose `Customize`, and then just drag-and-drop the Uppity button to where you like it.
 
