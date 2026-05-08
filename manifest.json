@@ -30,9 +30,6 @@
   "commands": {
     "go-up": {
       "suggested_key": { "default": "Alt+Up" }
-    },
-    "menu": {
-      "suggested_key": { "default": "Alt+Down" }
     }
   },
 

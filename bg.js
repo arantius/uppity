@@ -22,10 +22,5 @@ browser.browserAction.onClicked.addListener(goUp);
 browser.commands.onCommand.addListener(command => {
   if (command == 'go-up') {
     goUp();
-  } else if (command == 'menu') {
-    // Oh "Activating a keyboard shortcut defined by the extension
-    // (note: this is not currently supported in Firefox)." =(
-
-    //browser.browserAction.openPopup();
   }
 });
