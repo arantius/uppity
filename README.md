@@ -23,6 +23,9 @@ Right click on your toolbar, choose `Customize`, and then just drag-and-drop the
 
 # Changelog
 
+ * Version 2.2 (May 8, 2026)
+  * Bug fix when frames cause the toolbar button to be incorrectly disabled. (#14)
+  * Remove the popup menu which never quite worked as desired, and its keyboard hotkey. (#9)
  * Version 2.1 (Apr 16, 2018)
    * Bug fix when multiple Firefox windows are open. (#6)
  * Version 2.0 (Nov 12, 2017)
