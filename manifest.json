@@ -17,7 +17,8 @@
   "browser_action": {
     "browser_style": false,
     "default_icon": "skin/tb-icon-large.png",
-    "default_title": "Uppity"
+    "default_title": "Uppity",
+    "default_popup": "popup.html"
   },
 
   "background": {
