@@ -114,6 +114,7 @@ function setDisabled(url) {
 
 
 browser.webNavigation.onCompleted.addListener(detail => {
+  if (detail.frameId !== 0) return;  // Ignore any but top window.
   setDisabled(detail.url);
 });
 browser.tabs.onActivated.addListener(event => {
