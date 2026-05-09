@@ -23,6 +23,8 @@ Right click on your toolbar, choose `Customize`, and then just drag-and-drop the
 
 # Changelog
 
+ * Version 2.3 (May 9, 2026)
+  * Working menu of selectable URLs, accessed with "Alt-Down" hotkey (by default). (#9)
  * Version 2.2 (May 8, 2026)
   * Bug fix when frames cause the toolbar button to be incorrectly disabled. (#14)
   * Remove the popup menu which never quite worked as desired, and its keyboard hotkey. (#9)
