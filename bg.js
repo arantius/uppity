@@ -23,6 +23,8 @@ browser.commands.onCommand.addListener(async command => {
   if (command == 'go-up') {
     browser.tabs.update({'url': nextUrl});
   } else if (command == 'menu') {
+    browser.browserAction.setPopup({'popup': 'popup.html'});
     browser.browserAction.openPopup();
+    browser.browserAction.setPopup({'popup': null});
   }
 });

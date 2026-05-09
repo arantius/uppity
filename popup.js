@@ -49,7 +49,7 @@ browser.tabs.query({'active': true}).then(tabs => {
 
   let urls = getUrlsFor(currentTab.url);
   let i = 1;
-  for (let url of urls.list) {
+  for (let url of urls.list.slice(1)) {
     let li = document.createElement('li');
     li.textContent = url;
     li.tabIndex = i++;
