@@ -23,6 +23,8 @@ Right click on your toolbar, choose `Customize`, and then just drag-and-drop the
 
 # Changelog
 
+ * Version 2.3.1 (May 11, 2026)
+  * Include popup (.html) mistakely missing from previous build.
  * Version 2.3 (May 9, 2026)
   * Working menu of selectable URLs, accessed with "Alt-Down" hotkey (by default). (#9)
  * Version 2.2 (May 8, 2026)
