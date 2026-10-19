@@ -40,7 +40,7 @@ function handleArrowKey(event) {
 }
 
 
-browser.tabs.query({'active': true}).then(tabs => {
+browser.tabs.query({'active': true, 'currentWindow': true}).then(tabs => {
   currentTab = tabs.length && tabs[0] || null;
   if (!currentTab) {
     console.warn('No current tab?!');
