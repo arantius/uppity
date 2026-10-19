@@ -104,6 +104,19 @@ function getUrlsFor(url) {
 }
 
 
+// Like setDisabled() but infers the current URL.
+function setCurrentDisabled() {
+  browser.tabs.query({'active': true, 'currentWindow': true}).then(tabs => {
+    let currentTab = tabs.length && tabs[0] || null;
+    if (!currentTab) {
+      console.warn('No current tab?!');
+      return;
+    }
+    setDisabled(currentTab.url);
+  });
+}
+
+
 function setDisabled(url) {
   if (getUrlsFor(url).list.length>0) {
     browser.browserAction.enable();
