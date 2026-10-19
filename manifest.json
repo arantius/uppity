@@ -5,7 +5,6 @@
   "description": "Navigate up one level (directory).",
   "homepage_url": "https://github.com/arantius/uppity",
   "icons": {"32": "skin/em-icon.png"},
-  "default_locale": "en_US",
 
   "applications": {
     "gecko": {
