@@ -111,19 +111,3 @@ function setDisabled(url) {
     browser.browserAction.disable();
   }
 }
-
-
-browser.webNavigation.onCompleted.addListener(detail => {
-  if (detail.frameId !== 0) return;  // Ignore any but top window.
-  setDisabled(detail.url);
-});
-browser.tabs.onActivated.addListener(event => {
-  browser.tabs.query({'active': true, 'currentWindow': true}).then(tabs => {
-    let currentTab = tabs.length && tabs[0] || null;
-    if (!currentTab) {
-      console.warn('No current tab?!');
-      return;
-    }
-    setDisabled(currentTab.url);
-  });
-});
